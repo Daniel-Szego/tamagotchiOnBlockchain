@@ -54,6 +54,9 @@ contract Tamagotchi {
 
   /// @notice heartbeat of the digital organism
   function heartbeat() isTamagotchiAlive public {
+      if ((hungerLevel < 5) || (sleepLevel < 5) || (playLevel < 5)) {
+        isAlive = false;
+      }      
       hungerLevel = hungerLevel - 5;
       sleepLevel = 100 - 5;
       playLevel = 100 - 5;
@@ -62,17 +65,23 @@ contract Tamagotchi {
 
   /// @notice feed the digital organism
   function feed() isTamagotchiAlive public {
-
+    if (hungerLevel < 95) {
+      hungerLevel = hungerLevel +5;
+    }
   }
 
   /// @notice sleep the digital organism
   function sleep() isTamagotchiAlive public {
-      
+    if (sleepLevel < 95) {
+      sleepLevel = sleepLevel +5;
+    }      
   }
 
   /// @notice play the digital organism
   function play() isTamagotchiAlive public {
-      
+    if (playLevel < 95) {
+      playLevel = playLevel +5;
+    }            
   }
 
   /// @notice fallback function
